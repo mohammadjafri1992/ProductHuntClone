@@ -11,6 +11,8 @@ class Product(models.Model):
     icon = models.ImageField(upload_to='images/')
     votes_total = models.IntegerField(default=1)
     hunter = models.ForeignKey(User, on_delete=models.CASCADE)
+    #voter = models.BooleanField(default=True)
+    #say_something_nice = models.TextField()
 
     def __str__(self):
         return self.title
