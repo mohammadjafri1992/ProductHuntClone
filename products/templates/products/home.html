@@ -4,4 +4,35 @@
 
 <h1>Home</h1>
 
+<a class="btn btn-primary" href="{% url 'create' %}" role="button">Create Product</a>
+
+{% for product in products.all %}
+
+  <div class='row pt-3'>
+    <div class='col-2' onclick="window.location='{% url 'detail' product.id %}';" style='cursor: pointer'>
+      <img src="{{ product.icon.url }}" class='img-fluid' />
+      <br/>
+      <br/>
+
+    </div>
+    <div class='col-6' style='cursor: pointer'>
+      a<h1>{{ product.title }}</h1>
+      <p>{{ product.summary }}</p>
+
+    </div>
+    <div class='col-4' style='cursor: pointer'>
+      <a href="javascript:{document.getElementById('upvote{{ product.id }}').submit()}"><button class='btn btn-primary btn-lg btn-block'>Upvote {{ product.votes_total }}</button></a>
+      <form action=""></form>
+    </div>
+  </div>
+
+  <form id='upvote{{ product.id }}' method="POST" action="{% url 'upvote' product.id %}">
+  {% csrf_token %}
+  <input type="hidden">
+
+  </form>
+
+
+{% endfor %}
+
 {% endblock %}
